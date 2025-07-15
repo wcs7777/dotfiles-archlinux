@@ -1,0 +1,7 @@
+[tool.pyright]
+extraPaths=[
+	"dotbot-plugins"
+]
+reportImplicitOverride = false
+reportExplicitAny = false
+reportAny = false

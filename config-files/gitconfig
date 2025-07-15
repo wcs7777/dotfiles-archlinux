@@ -1,0 +1,32 @@
+[credential]
+	helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+	useHttpPath = true
+[core]
+	repositoryFormatVersion = 0
+	symlinks = false
+	editor = vim
+[alias]
+	edit = config --edit
+	editg = config --global --edit
+	st = status -sb
+	b = branch
+	c = checkout
+	m = checkout main
+	cob = checkout -b
+	l = log --oneline
+	lg = log --all --graph --decorate --oneline --abbrev-commit
+	last = log -1 HEAD --stat
+	cm = !git add -A && git commit -m
+	bdel = branch -D
+	undo = reset HEAD~1 --mixed
+	amend = commit -a --amend
+	se = !git rev-list --all | xargs git grep -F
+	done = !git push origin HEAD
+	upstream = !git push -u origin HEAD
+	down=!git pull --rebase --prune $@ && git submodule update --init --recursive
+	downm=!git pull --rebase --prune origin main && git submodule update --init
+	rlc = reset HEAD^
+	br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+[init]
+	defaultBranch = main

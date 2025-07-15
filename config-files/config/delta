@@ -1,0 +1,7 @@
+[delta]
+	line-numbers = true
+	navigate = true
+	syntax-theme = GitHub
+	true-color = always
+	tabs = 4
+	zero-style = dim syntax

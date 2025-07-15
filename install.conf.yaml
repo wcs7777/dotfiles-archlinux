@@ -1,0 +1,104 @@
+- plugins:
+  - dotbot-plugins/git.py
+  - dotbot-plugins/yay.py
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [sudo ln -f "$(pwd)"/config-files/etc/wsl.conf /etc/wsl.conf, Linking wsl.conf]
+  -
+    command: source ./setup-scripts/install-yay.sh
+    description: Installing yay
+    stdin: true
+    stdout: true
+    stderr: true
+  - [sudo ln -f "$(pwd)"/config-files/etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist, Linking mirrorlist]
+
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- link:
+    ~/.gitconfig: config-files/gitconfig
+    ~/.tmux.conf: config-files/tmux.conf
+    ~/.p10k.zsh: config-files/p10k.zsh
+    ~/.zshrc: config-files/zshrc
+    ~/.vim/vimrc: config-files/vim/vimrc
+    ~/.vim/colors/PaperColor.vim: config-files/vim/colors/PaperColor.vim
+    ~/.local/bin/xdg-open: config-files/local/bin/xdg-open
+    ~/.config/delta: config-files/config/delta
+    ~/.config/bat/config: config-files/config/bat/config
+    ~/.my: config-files/my
+    ~/win: /mnt/c/Users/wcs
+    ~/data:
+      path: /mnt/wsl/data
+      ignore-missing: true
+    ~/.config/home-manager/flake.nix:
+      type: hardlink
+      path: config-files/config/home-manager/flake.nix
+    ~/.config/home-manager/home.nix:
+      type: hardlink
+      path: config-files/config/home-manager/home.nix
+
+- defaults:
+    git:
+      depth: 1
+      create_parents: true
+
+- git:
+    ~/.zsh/powerlevel10k: https://github.com/romkatv/powerlevel10k.git
+    ~/.zsh/zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions
+    ~/.zsh/zsh-syntax-highlighting: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    ~/.zsh/zsh-vi-mode: https://github.com/jeffreytse/zsh-vi-mode.git
+    ~/.tmux/plugins/tpm: https://github.com/tmux-plugins/tpm
+    ~/.config/nvim: https://github.com/wcs7777/neovimrc.git
+
+- defaults:
+    yay:
+      needed: true
+      batch_mode: true
+
+- yay:
+  - base-devel
+  - bat
+  - curl
+  - fd
+  - fuse
+  - fzf
+  - git-delta
+  - libxml2
+  - libxslt
+  - libyaml
+  - man-db
+  - msodbcsql
+  - mssql-tools
+  - openssh
+  - pacman-contrib
+  - reflector
+  - ripgrep
+  - sudo
+  - tmux
+  - trash-cli
+  - tree
+  - unixodbc
+  - unzip
+  - vim
+  - wget
+  - which
+  - xorg-xeyes
+  - zip
+  - zsh
+
+- shell:
+  -
+    command: source ./setup-scripts/install-nix.sh
+    description: Installing nix
+    stdin: true
+    stdout: true
+    stderr: true
+  - [sudo ln -f "$(pwd)"/config-files/etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf, Linking reflector]
+  - [source ./setup-scripts/install-docker.sh, Installing docker]
+  - [source ./setup-scripts/install-nvim.sh, Installing nvim]
+  - [~/.tmux/plugins/tpm/bin/install_plugins, Installing tpm plugins]
+  - [~/.tmux/plugins/tpm/bin/update_plugins all, Updating tpm plugins]
+  - [~/.local/bin/nvim --headless "+Lazy! install" +qa, Installing Lazy plugins]
