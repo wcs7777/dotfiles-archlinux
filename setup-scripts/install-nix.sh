@@ -9,4 +9,3 @@ sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
 
 mkdir -p ~/.config/nix
 echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
-nix build ~/.config/home-manager#homeConfigurations."wcs".activationPackage
